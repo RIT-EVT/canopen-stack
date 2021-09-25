@@ -18,8 +18,8 @@
 * INCLUDES
 ******************************************************************************/
 
-#include "co_tmr.h"
-#include "co_core.h"
+#include <Canopen/co_tmr.h>
+#include <Canopen/co_core.h>
 
 /******************************************************************************
 * EXTERNAL FUNCTIONS

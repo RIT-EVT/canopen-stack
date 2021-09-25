@@ -18,8 +18,8 @@
 * INCLUDES
 ******************************************************************************/
 
-#include "co_sync.h"
-#include "co_core.h"
+#include <Canopen/co_sync.h>
+#include <Canopen/co_core.h>
 
 /******************************************************************************
 * GLOBAL CONSTANTS

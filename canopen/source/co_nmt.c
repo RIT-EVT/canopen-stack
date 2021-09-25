@@ -18,9 +18,9 @@
 * INCLUDES
 ******************************************************************************/
 
-#include "co_nmt.h"
+#include <Canopen/co_nmt.h>
 
-#include "co_core.h"
+#include <Canopen/co_core.h>
 
 /******************************************************************************
 * PRIVATE CONSTANTS

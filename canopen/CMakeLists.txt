@@ -3,16 +3,15 @@
 #
 add_library(Canopen)
 
-#---
-# define interface
-#
 target_include_directories(Canopen
-  PUBLIC
-    config
-    include
-  PRIVATE
-    source
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/config/>
+           $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
+target_include_directories(Canopen
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
+           $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
+
 
 #---
 # specify the implementation files

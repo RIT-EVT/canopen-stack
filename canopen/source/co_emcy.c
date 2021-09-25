@@ -18,8 +18,8 @@
 * INCLUDES
 ******************************************************************************/
 
-#include "co_core.h"
-#include "co_emcy.h"
+#include <Canopen/co_core.h>
+#include <Canopen/co_emcy.h>
 
 /******************************************************************************
 * GLOBAL CONSTANTS

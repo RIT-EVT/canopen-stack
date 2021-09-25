@@ -18,10 +18,10 @@
 * INCLUDES
 ******************************************************************************/
 
-#include "co_dict.h"
+#include <Canopen/co_dict.h>
 
-#include "co_obj.h"
-#include "co_core.h"
+#include <Canopen/co_obj.h>
+#include <Canopen/co_core.h>
 
 /******************************************************************************
 * FUNCTIONS

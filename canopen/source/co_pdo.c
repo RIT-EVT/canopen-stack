@@ -18,9 +18,9 @@
 * INCLUDES
 ******************************************************************************/
 
-#include "co_pdo.h"
+#include <Canopen/co_pdo.h>
 
-#include "co_core.h"
+#include <Canopen/co_core.h>
 
 /******************************************************************************
 * GLOBAL CONSTANTS
