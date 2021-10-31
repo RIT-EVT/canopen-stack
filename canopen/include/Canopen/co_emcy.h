@@ -435,10 +435,13 @@ void COEmcyHistAdd(CO_EMCY *emcy, uint8_t err, CO_EMCY_USR *usr);
 * \param len
 *    Length of buffer memory
 *
+* \param priv
+*    Private data that may be passed in
+*
 * \retval   =CO_ERR_NONE    emergency entry is read
 * \retval  !=CO_ERR_NONE    an error is detected and function aborted
 */
-CO_ERR COTypeEmcyRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len);
+CO_ERR COTypeEmcyRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv);
 
 /*! \brief EMCY OBJECT WRITE ACCESS
 *
@@ -459,10 +462,13 @@ CO_ERR COTypeEmcyRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, u
 * \param len
 *    Length of buffer memory
 *
+* \param priv
+*    Private data that may be passed in
+*
 * \retval  CO_ERR_NONE        emergency history is cleared
 * \retval  CO_ERR_TYPE_WR     an error is detected and function aborted
 */
-CO_ERR COTypeEmcyWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len);
+CO_ERR COTypeEmcyWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv);
 
 /*! \brief EMCY COB-ID WRITE ACCESS
 *
@@ -482,10 +488,13 @@ CO_ERR COTypeEmcyWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, 
 * \param len
 *    Length of buffer memory
 *
+* \param priv
+*    Private data for the function to use
+*
 * \retval  CO_ERR_NONE        EMCY COB-ID object entry is written
 * \retval  CO_ERR_OBJ_RANGE   an error is detected and function aborted
 */
-CO_ERR COTypeEmcyIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len);
+CO_ERR COTypeEmcyIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv);
 
 #ifdef __cplusplus               /* for compatibility with C++ environments  */
 }

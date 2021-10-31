@@ -24,7 +24,7 @@
 * GLOBAL CONSTANTS
 ******************************************************************************/
 
-const CO_OBJ_TYPE COTSdoId = { 0, 0, 0, COTypeSdoIdWrite };
+const CO_OBJ_TYPE COTSdoId = { 0, 0, 0, COTypeSdoIdWrite, NULL };
 
 /******************************************************************************
 * FUNCTIONS
@@ -1015,7 +1015,7 @@ void COSdoAbortReq(CO_SDO *srv)
 /*
 * see function definition
 */
-CO_ERR COTypeSdoIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypeSdoIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_ERR    err = CO_ERR_NONE;
     uint32_t  newval;

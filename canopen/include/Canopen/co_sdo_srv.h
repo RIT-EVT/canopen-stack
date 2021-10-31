@@ -611,10 +611,13 @@ void COSdoAbortReq(CO_SDO *srv);
 * \param size
 *    Size of given data in buffer
 *
+* \param priv
+*    Private data for the function to use
+*
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypeSdoIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypeSdoIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 #ifdef __cplusplus               /* for compatibility with C++ environments  */
 }

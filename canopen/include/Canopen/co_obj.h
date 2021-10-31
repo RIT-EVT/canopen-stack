@@ -495,13 +495,13 @@ typedef struct CO_OBJ_T {
 } CO_OBJ;
 
 /*!< Size type function prototype */
-typedef uint32_t (*CO_OBJ_SIZE_FUNC) (struct CO_OBJ_T *, struct CO_NODE_T *, uint32_t);
+typedef uint32_t (*CO_OBJ_SIZE_FUNC) (struct CO_OBJ_T *, struct CO_NODE_T *, uint32_t, void*);
 /*!< Control type function prototype */
-typedef CO_ERR   (*CO_OBJ_CTRL_FUNC) (struct CO_OBJ_T *, struct CO_NODE_T *, uint16_t, uint32_t);
+typedef CO_ERR   (*CO_OBJ_CTRL_FUNC) (struct CO_OBJ_T *, struct CO_NODE_T *, uint16_t, uint32_t, void*);
 /*!< Read type function prototype */
-typedef CO_ERR   (*CO_OBJ_READ_FUNC) (struct CO_OBJ_T *, struct CO_NODE_T *, void*, uint32_t);
+typedef CO_ERR   (*CO_OBJ_READ_FUNC) (struct CO_OBJ_T *, struct CO_NODE_T *, void*, uint32_t, void*);
 /*!< Write type function prototype */
-typedef CO_ERR   (*CO_OBJ_WRITE_FUNC)(struct CO_OBJ_T *, struct CO_NODE_T *, void*, uint32_t);
+typedef CO_ERR   (*CO_OBJ_WRITE_FUNC)(struct CO_OBJ_T *, struct CO_NODE_T *, void*, uint32_t, void*);
 
 /*! \brief OBJECT TYPE
 *
@@ -513,7 +513,7 @@ typedef struct CO_OBJ_TYPE_T {
     CO_OBJ_CTRL_FUNC   Ctrl;           /*!< Special type control function    */
     CO_OBJ_READ_FUNC   Read;           /*!< Read function                    */
     CO_OBJ_WRITE_FUNC  Write;          /*!< Write function                   */
-
+    void *             Private;        /*!< Private data of the type         */
 } CO_OBJ_TYPE;
 
 /*! \brief DOMAIN MANAGEMENT STRUCTURE
@@ -891,7 +891,7 @@ void COObjTypeUserSDOAbort(CO_OBJ *obj, struct CO_NODE_T *node, uint32_t abort);
 *    Number of character in the string, counting without the end of string
 *    mark.
 */
-uint32_t COTypeStringSize(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint32_t width);
+uint32_t COTypeStringSize(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint32_t width, void *priv);
 
 /*! \brief STRING OBJECT ACCESS CONTROL
 *
@@ -916,7 +916,7 @@ uint32_t COTypeStringSize(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint32_t
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypeStringCtrl(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t func, uint32_t para);
+CO_ERR COTypeStringCtrl(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t func, uint32_t para, void *priv);
 
 /*! \brief STRING OBJECT READ ACCESS
 *
@@ -938,7 +938,7 @@ CO_ERR COTypeStringCtrl(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t f
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypeStringRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len);
+CO_ERR COTypeStringRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv);
 
 /*! \brief DOMAIN OBJECT SIZE
 *
@@ -956,7 +956,7 @@ CO_ERR COTypeStringRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf,
 * \return
 *    Size in bytes of the domain.
 */
-uint32_t COTypeDomainSize(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint32_t width);
+uint32_t COTypeDomainSize(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint32_t width, void *priv);
 
 /*! \brief DOMAIN OBJECT ACCESS CONTROL
 *
@@ -981,7 +981,7 @@ uint32_t COTypeDomainSize(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint32_t
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypeDomainCtrl(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t func, uint32_t para);
+CO_ERR COTypeDomainCtrl(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t func, uint32_t para, void *priv);
 
 /*! \brief DOMAIN OBJECT READ ACCESS
 *
@@ -1003,7 +1003,7 @@ CO_ERR COTypeDomainCtrl(struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t f
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypeDomainRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len);
+CO_ERR COTypeDomainRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv);
 
 /*! \brief DOMAIN OBJECT WRITE ACCESS
 *
@@ -1025,7 +1025,7 @@ CO_ERR COTypeDomainRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf,
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypeDomainWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len);
+CO_ERR COTypeDomainWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv);
 
 #ifdef __cplusplus               /* for compatibility with C++ environments  */
 }

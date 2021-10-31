@@ -25,8 +25,8 @@
 * GLOBAL CONSTANTS
 ******************************************************************************/
 
-const CO_OBJ_TYPE COTEmcy = { 0, 0, COTypeEmcyRead, COTypeEmcyWrite };
-const CO_OBJ_TYPE COTEmcyId = { 0, 0, 0, COTypeEmcyIdWrite };
+const CO_OBJ_TYPE COTEmcy = { 0, 0, COTypeEmcyRead, COTypeEmcyWrite, NULL };
+const CO_OBJ_TYPE COTEmcyId = { 0, 0, 0, COTypeEmcyIdWrite, NULL };
 
 /******************************************************************************
 * FUNCTIONS
@@ -472,7 +472,7 @@ void COEmcyHistAdd(CO_EMCY *emcy, uint8_t err, CO_EMCY_USR *usr)
 /*
 * see function definition
 */
-CO_ERR COTypeEmcyRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len)
+CO_ERR COTypeEmcyRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv)
 {
     CO_ERR   result = CO_ERR_NONE;
     CO_DICT *cod;
@@ -505,7 +505,7 @@ CO_ERR COTypeEmcyRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, u
 /*
 * see function definition
 */
-CO_ERR COTypeEmcyWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len)
+CO_ERR COTypeEmcyWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv)
 {
     CO_ERR   result = CO_ERR_TYPE_WR;
     CO_EMCY *emcy;
@@ -530,7 +530,7 @@ CO_ERR COTypeEmcyWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, 
 /*
 * see function definition
 */
-CO_ERR COTypeEmcyIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len)
+CO_ERR COTypeEmcyIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv)
 {
     CO_ERR    result = CO_ERR_NONE;
     uint32_t  nid;

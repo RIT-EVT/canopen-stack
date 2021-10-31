@@ -372,10 +372,13 @@ void COTPdoMapDelSig(CO_TPDO_LINK *map, struct CO_OBJ_T *obj);
 * \param para
 *    unused (should be 0)
 *
+* \param priv
+*    Private data the function could use
+*
 * \retval  ==CO_ERR_NONE    Successful TPDO event triggered
 * \retval  !=CO_ERR_NONE    Function aborted due to detected error
 */
-CO_ERR COTypeAsyncCtrl(struct CO_OBJ_T* obj, struct CO_NODE_T *node, uint16_t func, uint32_t para);
+CO_ERR COTypeAsyncCtrl(struct CO_OBJ_T* obj, struct CO_NODE_T *node, uint16_t func, uint32_t para, void *priv);
 
 /*! \brief TPDO EVENT TIMER OBJECT WRITE ACCESS
 *
@@ -394,10 +397,13 @@ CO_ERR COTypeAsyncCtrl(struct CO_OBJ_T* obj, struct CO_NODE_T *node, uint16_t fu
 * \param size
 *    Size of given data in buffer
 *
+* \param priv
+*    Private data the function could use
+*
 * \retval  ==CO_ERR_NONE    writing successful
 * \retval  !=CO_ERR_NONE    error is detected and function aborted
 */
-CO_ERR COTypeEventWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypeEventWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /*! \brief RPDO CLEAR
 *
@@ -531,10 +537,13 @@ void CORPdoWrite(CO_RPDO *pdo, CO_IF_FRM *frm);
 * \param size
 *    Object size in byte
 *
+* \param priv
+*    Private data the function could use
+*
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypePdoMapNumWrite(struct CO_OBJ_T* obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypePdoMapNumWrite(struct CO_OBJ_T* obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /*! \brief  WRITE PDO MAPPING
 *
@@ -553,10 +562,13 @@ CO_ERR COTypePdoMapNumWrite(struct CO_OBJ_T* obj, struct CO_NODE_T *node, void *
 * \param size
 *    Object size in byte
 *
+* \param priv
+*    Private data the function could use
+*
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypePdoMapWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypePdoMapWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /*! \brief  WRITE PDO IDENTIFIER
 *
@@ -575,10 +587,13 @@ CO_ERR COTypePdoMapWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf
 * \param size
 *    Object size in byte
 *
+* \param priv
+*    Private data for the function to use
+*
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypePdoComIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypePdoComIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /*! \brief  WRITE PDO IDENTIFIER
 *
@@ -597,10 +612,13 @@ CO_ERR COTypePdoComIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *b
 * \param size
 *    Object size in byte
 *
+* \param priv
+*    Private data for the function to use
+*
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypePdoComTypeWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypePdoComTypeWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /******************************************************************************
 * CALLBACK FUNCTIONS

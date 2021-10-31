@@ -109,11 +109,11 @@ void COParaStore(CO_PARA *pg, struct CO_NODE_T *node);
 *    Ptr to node info
 */
 void COParaRestore(CO_PARA *pg, struct CO_NODE_T *node);
-    
+
 /******************************************************************************
 * PRIVATE FUNCTIONS
 ******************************************************************************/
-    
+
 /*! \brief CHECK PARAMETER OBJECT ACCESS
 *
 *    This function is responsible for checking the access to parameter
@@ -158,10 +158,13 @@ CO_ERR COParaCheck(CO_OBJ* obj, struct CO_NODE_T *node, void *buf, uint32_t size
 * \param size
 *    Size of given data in buffer
 *
+* \param priv
+*    Private data the function may use
+*
 * \retval  ==CO_ERR_NONE    store / restore successful
 * \retval  !=CO_ERR_NONE    error is detected and function aborted
 */
-CO_ERR COTypeParaRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypeParaRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /*! \brief PARAMETER OBJECT WRITE ACCESS
 *
@@ -180,10 +183,13 @@ CO_ERR COTypeParaRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, u
 * \param size
 *    Size of given data in buffer
 *
+* \param priv
+*    Private data the function may use
+*
 * \retval  ==CO_ERR_NONE    store / restore successful
 * \retval  !=CO_ERR_NONE    error is detected and function aborted
 */
-CO_ERR COTypeParaWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypeParaWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /******************************************************************************
 * CALLBACK FUNCTIONS

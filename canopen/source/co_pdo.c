@@ -26,12 +26,12 @@
 * GLOBAL CONSTANTS
 ******************************************************************************/
 
-const CO_OBJ_TYPE COTAsync   = { 0, COTypeAsyncCtrl, 0, 0 };
-const CO_OBJ_TYPE COTEvent   = { 0, 0, 0, COTypeEventWrite };
-const CO_OBJ_TYPE COTPdoMapN = { 0, 0, 0, COTypePdoMapNumWrite };
-const CO_OBJ_TYPE COTPdoMap  = { 0, 0, 0, COTypePdoMapWrite };
-const CO_OBJ_TYPE COTPdoId   = { 0, 0, 0, COTypePdoComIdWrite };
-const CO_OBJ_TYPE COTPdoType = { 0, 0, 0, COTypePdoComTypeWrite };
+const CO_OBJ_TYPE COTAsync   = { 0, COTypeAsyncCtrl, 0, 0 , NULL};
+const CO_OBJ_TYPE COTEvent   = { 0, 0, 0, COTypeEventWrite, NULL };
+const CO_OBJ_TYPE COTPdoMapN = { 0, 0, 0, COTypePdoMapNumWrite, NULL };
+const CO_OBJ_TYPE COTPdoMap  = { 0, 0, 0, COTypePdoMapWrite, NULL };
+const CO_OBJ_TYPE COTPdoId   = { 0, 0, 0, COTypePdoComIdWrite, NULL };
+const CO_OBJ_TYPE COTPdoType = { 0, 0, 0, COTypePdoComTypeWrite, NULL };
 
 /******************************************************************************
 * FUNCTIONS
@@ -82,7 +82,7 @@ void COTPdoClear(CO_TPDO *pdo, CO_NODE *node)
         CONodeFatalError();
         return;
     }
-    
+
     COTPdoMapClear(node->TMap);
     for (num = 0; num < CO_TPDO_N; num++) {
         pdo[num].Node       = node;
@@ -111,7 +111,7 @@ void COTPdoInit(CO_TPDO *pdo, CO_NODE *node)
         CONodeFatalError();
         return;
     }
-    
+
     COTPdoMapClear(node->TMap);
     for (num = 0; num < CO_TPDO_N; num++) {
         pdo[num].Node       = node;
@@ -162,7 +162,7 @@ void COTPdoReset(CO_TPDO *pdo, uint16_t num)
         COSyncRemove(sync, num, CO_SYNC_FLG_TX);
     }
     wp->Flags = 0;
-    
+
     /* pdo communication settings */
     err = CODictRdByte(cod, CO_DEV(0x1800 + num, 2), &type);
     if (err != CO_ERR_NONE) {
@@ -203,7 +203,7 @@ void COTPdoReset(CO_TPDO *pdo, uint16_t num)
     } else {
         pdo[num].Identifier = CO_TPDO_COBID_OFF;
     }
-    
+
     /* pdo mapping settings */
     err = COTPdoGetMap(pdo, num);
     if (err != CO_ERR_NONE) {
@@ -290,7 +290,7 @@ void COTPdoTmrEvent (void *parg)
 void COTPdoEndInhibit(void *parg)
 {
     CO_TPDO *pdo;
-    
+
     pdo = (CO_TPDO *)parg;
     pdo->Flags &= ~CO_TPDO_FLG__I_;
     pdo->InTmr  = -1;
@@ -386,7 +386,7 @@ void COTPdoMapClear(CO_TPDO_LINK *map)
 void COTPdoMapAdd(CO_TPDO_LINK *map, CO_OBJ *obj, uint16_t num)
 {
     uint16_t id;
-    
+
     for (id = 0; id < (CO_TPDO_N << 3); id++) {
         if (map[id].Obj == 0) {
             map[id].Obj = obj;
@@ -402,7 +402,7 @@ void COTPdoMapAdd(CO_TPDO_LINK *map, CO_OBJ *obj, uint16_t num)
 void COTPdoMapDelNum(CO_TPDO_LINK *map, uint16_t num)
 {
     uint16_t id;
-    
+
     for (id = 0; id < (CO_TPDO_N << 3); id++) {
         if (map[id].Num == num) {
             map[id].Obj = 0;
@@ -429,7 +429,7 @@ void COTPdoMapDelSig(CO_TPDO_LINK *map, CO_OBJ *obj)
 /*
 * see function definition
 */
-CO_ERR COTypeAsyncCtrl (struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t func, uint32_t para)
+CO_ERR COTypeAsyncCtrl (struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t func, uint32_t para, void *priv)
 {
     CO_ERR result = CO_ERR_NONE;
 
@@ -445,7 +445,7 @@ CO_ERR COTypeAsyncCtrl (struct CO_OBJ_T *obj, struct CO_NODE_T *node, uint16_t f
 /*
 * see function definition
 */
-CO_ERR COTypeEventWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypeEventWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_DICT  *cod;
     CO_NMT   *nmt;
@@ -503,7 +503,7 @@ CO_ERR COTypeEventWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf,
 void CORPdoClear(CO_RPDO *pdo, CO_NODE *node)
 {
     int16_t num;
-    
+
     if ((pdo == 0) || (node == 0)) {
         CONodeFatalError();
         return;
@@ -567,7 +567,7 @@ CO_ERR CORPdoReset(CO_RPDO *pdo, uint16_t num)
         COSyncRemove(&pdo->Node->Sync, num, CO_SYNC_FLG_RX);
     }
     wp->Flag = 0;
-    
+
     /* communication */
     err = CODictRdByte(cod, CO_DEV(0x1400 + num, 2), &type);
     if (err != CO_ERR_NONE) {
@@ -593,7 +593,7 @@ CO_ERR CORPdoReset(CO_RPDO *pdo, uint16_t num)
         pdo[num].Identifier = CO_RPDO_COBID_OFF;
         pdo[num].Flag       = 0;
     }
-    
+
     /* mapping */
     err = CORPdoGetMap(pdo, num);
     if (err != CO_ERR_NONE) {
@@ -607,7 +607,7 @@ CO_ERR CORPdoReset(CO_RPDO *pdo, uint16_t num)
 
     return (CO_ERR_NONE);
 }
-    
+
 /*
 * see function definition
 */
@@ -750,7 +750,7 @@ void CORPdoWrite(CO_RPDO *pdo, CO_IF_FRM *frm)
 /*
 * see function definition
 */
-CO_ERR COTypePdoMapNumWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypePdoMapNumWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_ERR    result = CO_ERR_NONE;
     CO_DICT  *cod;
@@ -808,7 +808,7 @@ CO_ERR COTypePdoMapNumWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *
 /*
 * see function definition
 */
-CO_ERR COTypePdoMapWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypePdoMapWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_ERR    result = CO_ERR_NONE;
     CO_DICT  *cod;
@@ -878,7 +878,7 @@ CO_ERR COTypePdoMapWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf
 /*
 * see function definition
 */
-CO_ERR COTypePdoComIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypePdoComIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_ERR    result = CO_ERR_NONE;
     CO_NMT   *nmt;
@@ -954,7 +954,7 @@ CO_ERR COTypePdoComIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *b
 /*
 * see function definition
 */
-CO_ERR COTypePdoComTypeWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypePdoComTypeWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_ERR    result = CO_ERR_NONE;
     CO_DICT  *cod;

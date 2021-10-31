@@ -94,7 +94,7 @@ CO_ERR COParaCheck(CO_OBJ* obj, struct CO_NODE_T *node, void *buf, uint32_t size
     if ((obj == 0) || (buf == 0) || (size != 4)) {
         return (CO_ERR_BAD_ARG);
     }
-    
+
     cod = &node->Dict;
 
     /* store parameter */
@@ -118,7 +118,7 @@ CO_ERR COParaCheck(CO_OBJ* obj, struct CO_NODE_T *node, void *buf, uint32_t size
         }
         result = CO_ERR_NONE;
     }
-    
+
     /* restore parameters */
     if (CO_GET_IDX(obj->Key) == 0x1011) {
         err = CODictRdByte(cod, CO_DEV(0x1011,0), &num);
@@ -151,7 +151,7 @@ CO_ERR COParaCheck(CO_OBJ* obj, struct CO_NODE_T *node, void *buf, uint32_t size
 /*
 * see function definition
 */
-CO_ERR COTypeParaRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypeParaRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_PARA *pg;
 
@@ -177,7 +177,7 @@ CO_ERR COTypeParaRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, u
 /*
 * see function definition
 */
-CO_ERR COTypeParaWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypeParaWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_ERR    select;
     CO_DICT  *cod;
@@ -186,7 +186,7 @@ CO_ERR COTypeParaWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, 
     uint16_t  idx;
     uint8_t   num;
     uint8_t   sub;
-    
+
     /* check parameter and configuration */
     select = COParaCheck(obj, node, buf, size);
     if (select != CO_ERR_NONE) {

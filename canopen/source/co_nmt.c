@@ -69,8 +69,8 @@ static const uint8_t CONmtModeCode[CO_MODE_NUM] = {
 * PUBLIC CONSTANTS
 ******************************************************************************/
 
-const CO_OBJ_TYPE COTNmtHbCons = { 0, 0, COTypeNmtHbConsRead, COTypeNmtHbConsWrite };
-const CO_OBJ_TYPE COTNmtHbProd = { 0, 0, 0, COTypeNmtHbProdWrite };
+const CO_OBJ_TYPE COTNmtHbCons = { 0, 0, COTypeNmtHbConsRead, COTypeNmtHbConsWrite, NULL };
+const CO_OBJ_TYPE COTNmtHbProd = { 0, 0, 0, COTypeNmtHbProdWrite, NULL };
 
 /******************************************************************************
 * FUNCTIONS
@@ -472,7 +472,7 @@ void CONmtHbConsMonitor(void *parg)
 /*
 * see function definition
 */
-CO_ERR COTypeNmtHbConsWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypeNmtHbConsWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_ERR      result = CO_ERR_TYPE_WR;
     CO_HBCONS  *hbc;
@@ -500,7 +500,7 @@ CO_ERR COTypeNmtHbConsWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *
 /*
 * see function definition
 */
-CO_ERR COTypeNmtHbConsRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len)
+CO_ERR COTypeNmtHbConsRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv)
 {
     CO_ERR     result = CO_ERR_NONE;
     CO_HBCONS *hbc;
@@ -665,7 +665,7 @@ int16_t CONmtCheck(CO_NMT *nmt, CO_IF_FRM *frm)
 /*
 * see function definition
 */
-CO_ERR COTypeNmtHbProdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size)
+CO_ERR COTypeNmtHbProdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv)
 {
     CO_ERR    result = CO_ERR_OBJ_ACC;
     CO_TMR   *tmr;

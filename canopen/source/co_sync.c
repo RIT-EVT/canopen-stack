@@ -25,7 +25,7 @@
 * GLOBAL CONSTANTS
 ******************************************************************************/
 
-const CO_OBJ_TYPE COTSyncId = { 0, 0, 0, COTypeSyncIdWrite };
+const CO_OBJ_TYPE COTSyncId = { 0, 0, 0, COTypeSyncIdWrite, NULL };
 
 /******************************************************************************
 * FUNCTIONS
@@ -182,7 +182,7 @@ void COSyncRestart(CO_SYNC *sync)
 /*
 * see function definition
 */
-CO_ERR COTypeSyncIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len)
+CO_ERR COTypeSyncIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv)
 {
     CO_ERR    result = CO_ERR_NONE;
     uint32_t  nid;

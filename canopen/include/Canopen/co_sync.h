@@ -177,10 +177,13 @@ void COSyncRestart(CO_SYNC *sync);
 * \param len
 *    Length of buffer memory
 *
+* \param priv
+*    Private data for the function to use
+*
 * \retval  CO_ERR_NONE        SYNC COB-ID object entry is written
 * \retval  CO_ERR_OBJ_RANGE   an error is detected and function aborted
 */
-CO_ERR COTypeSyncIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len);
+CO_ERR COTypeSyncIdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv);
 
 /******************************************************************************
 * CALLBACK FUNCTIONS

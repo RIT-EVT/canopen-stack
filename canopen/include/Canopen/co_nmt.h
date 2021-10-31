@@ -174,9 +174,9 @@ CO_MODE CONmtGetMode(CO_NMT *nmt);
 *    The following error are detected within this function:
 *    - CO_ERR_NMT_MODE: the CANopen device is not in INIT mode
 *    - CO_ERR_BAD_ARG: the given nodeId is invalid (e.g. zero)
-*    
+*
 * \note
-*    If one of these errors is detected, this function call will change 
+*    If one of these errors is detected, this function call will change
 *    nothing.
 *
 * \param nmt
@@ -205,7 +205,7 @@ uint8_t CONmtGetNodeId(CO_NMT *nmt);
 *    encoding.
 *
 * \param code
-*    heartbeat state 
+*    heartbeat state
 *
 * \retval  =CO_INVALID    An error is detected
 * \retval  >0             The corresponding NMT heartbeat state
@@ -341,7 +341,7 @@ void CONmtHbConsInit(CO_NMT *nmt);
 * \retval  !=CO_ERR_NONE    error detected (double activation, timer delete
 *                           problem)
 */
-CO_ERR CONmtHbConsActivate(CO_NMT    *nmt, 
+CO_ERR CONmtHbConsActivate(CO_NMT    *nmt,
                            CO_HBCONS *hbc,
                            uint16_t   time,
                            uint8_t    nodeid);
@@ -370,7 +370,7 @@ int16_t CONmtHbConsCheck(CO_NMT *nmt, CO_IF_FRM *frm);
 
 /*! \brief  HEARTBEAT CONSUMER TIMEOUT
 *
-*    This timer callback function checks that at least one received heartbeat 
+*    This timer callback function checks that at least one received heartbeat
 *    is detected for this heartbeat consumer.
 *
 * \param parg
@@ -396,10 +396,13 @@ void CONmtHbConsMonitor(void *parg);
 * \param size
 *    size of write value
 *
+* \param priv
+*    private data that may be used by the function
+*
 * \retval  CO_ERR_NONE       heartbeat consumer config is written
 * \retval  CO_ERR_TYPE_WR    an error is detected and function aborted
 */
-CO_ERR COTypeNmtHbConsWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypeNmtHbConsWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /*! \brief READ HEARTBEAT CONSUMER CONFIG
 *
@@ -419,10 +422,13 @@ CO_ERR COTypeNmtHbConsWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *
 * \param len
 *    size of write value
 *
+* \param priv
+*    private data that may be used by the function
+*
 * \retval   =CO_ERR_NONE    Successfully operation
 * \retval  !=CO_ERR_NONE    An error is detected
 */
-CO_ERR COTypeNmtHbConsRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len);
+CO_ERR COTypeNmtHbConsRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t len, void *priv);
 
 /*! \brief  WRITE HEARTBEAT PRODUCER TIME
 *
@@ -441,10 +447,13 @@ CO_ERR COTypeNmtHbConsRead(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *b
 * \param size
 *    size of write value
 *
+* \param priv
+*    private data that may be used by the function
+*
 * \retval   >0    heartbeat cycle time write successful
 * \retval  <=0    an error is detected and function aborted
 */
-CO_ERR COTypeNmtHbProdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size);
+CO_ERR COTypeNmtHbProdWrite(struct CO_OBJ_T *obj, struct CO_NODE_T *node, void *buf, uint32_t size, void *priv);
 
 /******************************************************************************
 * CALLBACK FUNCTIONS
