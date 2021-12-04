@@ -57,7 +57,7 @@ extern "C" {
 
 #define CO_SDO_ID_OFF      ((uint32_t)1<<31)  /*!< Disabled SDO server / COBID            */
 
-#define CO_SDO_BUF_SEG     127
+#define CO_SDO_BUF_SEG     300
 #define CO_SDO_BUF_BYTE    (CO_SDO_BUF_SEG*7) /*!< transfer buffer size in byte           */
 
 #define CO_TSDOID  ((CO_OBJ_TYPE *)&COTSdoId) /*!< Object Type Dynamic SDO Identifier     */
@@ -126,7 +126,7 @@ typedef struct CO_SDO_BLK_T {
     enum CO_SDO_BLK_STATE_T State;      /*!< block transfer state            */
     uint32_t                Size;       /*!< Size of object entry            */
     uint32_t                Len;        /*!< remaining block length in byte  */
-    uint8_t                 SegNum;     /*!< number of segments in block     */
+    uint16_t                SegNum;     /*!< number of segments in block     */
     uint8_t                 SegCnt;     /*!< current segment number          */
     uint8_t                 SegOk;      /*!< last successfull sent segment   */
     uint8_t                 LastValid;  /*!< valid bytes in last segment     */
