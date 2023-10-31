@@ -53,8 +53,8 @@ target_include_directories(canopen-stack PUBLIC
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/service/cia301>
 )
 
-target_include_directories(canopen-stack
-        PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/service/cia305>
+target_include_directories(canopen-stack PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/service/cia305>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/service/cia305>
 )
 
